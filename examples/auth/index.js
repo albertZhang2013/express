@@ -25,7 +25,7 @@ app.locals.use(function(req,res){
   res.locals.message = '';
   if (err) res.locals.message = '<p class="msg error">' + err + '</p>';
   if (msg) res.locals.message = '<p class="msg success">' + msg + '</p>';
-})
+});
 
 // Generate a salt for the user to prevent rainbow table attacks
 // for better security take a look at the bcrypt c++ addon:
@@ -40,7 +40,10 @@ var users = {
 
 // Used to generate a hash of the plain-text password + salt
 function hash(msg, key) {
-  return crypto.createHmac('sha256', key).update(msg).digest('hex');
+  return crypto
+    .createHmac('sha256', key)
+    .update(msg)
+    .digest('hex');
 }
 
 // Authenticate using our plain-object database of doom!
